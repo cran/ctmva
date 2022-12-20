@@ -32,8 +32,9 @@
 #' @export cca.ct
 cca.ct <-
   function(fdobj1, fdobj2) {
-    if (!isTRUE(fdobj1$basis == fdobj2$basis)) stop("Basis for both .fd arguments must be same.")
-    if (fdobj1$basis$type != "bspline") stop("Continuous-time cannonical correlation implemented only for B-spline bases.")
+    if (!isTRUE(fdobj1$basis == fdobj2$basis)) stop("Basis for both fd arguments must be same.")
+    if (fdobj1$basis$type != "bspline") 
+      stop("Continuous-time canonical correlation is implemented only for B-spline bases.")
     if (fdobj1$basis$nbasis < ncol(fdobj1$coefs) + ncol(fdobj2$coefs)) 
       stop("Combined number of functions in fdobj1, fdobj2 cannot exceed the number of basis functions.")
     P0 <- inprod.cent(fdobj1$basis)
@@ -52,6 +53,8 @@ cca.ct <-
     eig1 <- eigen(mat1); eig2 <- eigen(mat2)
     vex1 <- eig1$vec
     vex2 <- eig2$vec
+    #if (any(is.complex(vex1[,min(ncol(vex1),ncol(vex2))]))||any(is.complex(vex2[,min(ncol(vex1),ncol(vex2))]))) 
+    #  warning("Complex canonical coefficients. These may correspond to perfectly correlated canonical variates.")
     rownames(vex1) <- colnames(fdobj1$coef)
     rownames(vex2) <- colnames(fdobj2$coef)
 

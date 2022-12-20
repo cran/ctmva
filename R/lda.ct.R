@@ -41,11 +41,14 @@ lda.ct <-
     W..BW.. <- Wisr %*% B %*% Wisr
     W..BW.. <- (W..BW.. + t(W..BW..)) / 2
     eig <- eigen(W..BW..)
-    lst <- list(scaling = Wisr %*% eig$vectors[,1:nld],
+    scaling <- Wisr %*% eig$vectors[,1:nld]
+    rownames(scaling) <- fdobj$fdnames$vars
+    colnames(scaling) <- paste0("LD", 1:nld)
+    lst <- list(scaling = scaling,
                 values = eig$values[1:nld],
                 partition = partition,
                 nld = nld,
-                fdobj = fd(coef=C %*% eig$vectors[ , 1:nld], basisobj=bsb, 
+                fdobj = fd(coef=C %*% scaling, basisobj=bsb, 
                            fdnames=paste0("LD",1:nld)))
     class(lst) <- "lda.ct"
     lst

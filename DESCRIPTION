@@ -1,8 +1,8 @@
 Package: ctmva
 Type: Package
 Title: Continuous-Time Multivariate Analysis
-Version: 1.0
-Date: 2022-08-06
+Version: 1.1.0
+Date: 2022-12-20
 Authors@R: c(person("Biplab", "Paul", role = c("aut", "cre"), email = "paul.biplab497@gmail.com"), person(c("Philip", "Tzvi"), "Reiss", role = c("aut")))
 Maintainer: Biplab Paul <paul.biplab497@gmail.com>
 Description: Implements a basis function or functional data analysis framework
@@ -22,6 +22,6 @@ Author: Biplab Paul [aut, cre],
   Philip Tzvi Reiss [aut]
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2022-08-17 14:02:47 UTC; GOBINDO
+Packaged: 2022-12-20 11:23:35 UTC; GOBINDO
 Repository: CRAN
-Date/Publication: 2022-08-18 08:50:15 UTC
+Date/Publication: 2022-12-20 11:40:02 UTC
