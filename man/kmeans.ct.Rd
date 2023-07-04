@@ -41,7 +41,6 @@ time segments or set of time segments.
 }
 \examples{
 
-
 require(fda)
 data(CanadianWeather)
 daybasis <- create.bspline.basis(c(0,365), nbasis=55)

@@ -11,7 +11,7 @@ cca.ct(fdobj1, fdobj2)
 }
 \value{
 A list consisting of
-\item{vex1, vex2 }{matrices defining the canonical variates. The first columns of each give the coefficients defining the first pair of canonical variates; and so on.}  
+\item{vex1, vex2 }{matrices defining the canonical variates. The first columns of each give the coefficients defining the first pair of canonical variates; and so on.}
 \item{cor }{canonical correlations, i.e., correlations between the pairs of canonical variates}
 }
 \description{
@@ -30,12 +30,12 @@ daybasis <- create.bspline.basis(c(0,365), nbasis=80)
 tempfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"Temperature.C"], daybasis)$fd
 precfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"log10precip"], daybasis)$fd
 tpcor <- cca.ct(tempfd, precfd)
-oldpar <- par(mfrow=1:2)
-barplot(tpcor$vex1[,1], horiz=TRUE, las=1, main="Temperature", 
+par(mfrow=1:2)
+barplot(tpcor$vex1[,1], horiz=TRUE, las=1, main="Temperature",
             sub="First canonical coefficients vector")
 barplot(tpcor$vex2[,1], horiz=TRUE, las=1, main="Log precipitation",
             sub="First canonical coefficients vector")
-par(oldpar)
+
 
 
 }

@@ -4,15 +4,18 @@
 \alias{lda.ct}
 \title{Continuous-time Fisher's linear discriminant analysis}
 \usage{
-\method{lda}{ct}(fdobj, partition)
+lda.ct(fdobj, partition, part.names = NULL)
 }
 \arguments{
 \item{fdobj}{continuous-time multivariate data set of class \code{"\link[fda]{fd}"}}
 
 \item{partition}{a priori break points dividing the time interval into segments}
+
+\item{part.names}{optional character vector of names for the segments}
 }
 \value{
 Object of class "\code{lda.ct}", a list consisting of
+\item{means }{means of the variables within each segment}
 \item{scaling }{matrix of coefficients defining the discriminants (as in \code{\link[MASS]{lda}})}
 \item{values }{eigenvalues giving the ratios of between to within sums of squares}
 \item{partition }{the supplied \code{partition}}
@@ -22,6 +25,11 @@ Object of class "\code{lda.ct}", a list consisting of
 \description{
 A continuous-time version of Fisher's LDA, in which segments of the time
 interval take the place of groups of observations.
+}
+\details{
+The \code{means} and \code{scaling} components of the output are similar to
+\code{\link[MASS]{lda}}, but unlike that function, \code{lda.ct} performs only
+\emph{Fisher's} LDA and cannot incorporate priors or perform classification.
 }
 \examples{
 

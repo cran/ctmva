@@ -5,6 +5,8 @@
 #'
 #' @param x  linear discriminant analysis object produced by \code{\link{lda.ct}}
 #' @param ylab,xlab  y- and x-axis labels
+#' @param which which of the linear discrminants to plot
+#' @param col color vector
 #' @param \dots  other arguments passed to \code{\link{matplot}}
 #' @return  None; a plot is generated.
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
@@ -18,11 +20,14 @@
 #' @export plot.lda.ct
 #' @export
 plot.lda.ct <-
-function(x, ylab="Discriminants", xlab="Time", ...) {
+function(x, ylab="Discriminants", xlab="Time", which=NULL, col=NULL, ...) {
 	fdobj <- x$fdobj
+	wich <- if (is.null(which)) 1:ncol(fdobj$coef) else which
+	colvec <- if (is.null(col)) wich else col
 	grid <- seq(fdobj$basis$range[1], fdobj$basis$range[2], length = 401)
-	matplot(grid, scale(eval.fd(grid,fdobj),T,F), type='l', lty=1, ylab=ylab, xlab=xlab, ...)
-	legend("topleft", legend=paste0("LD", 1:x$nld), lty=1, col=1:x$nld)
+	matplot(grid, scale(eval.fd(grid,fdobj)[,wich],T,F), type='l', lty=1, ylab=ylab, xlab=xlab,
+	        col=colvec, ...)
+	legend("topleft", legend=paste0("LD", wich), lty=1, col=colvec)
 	for (p in x$partition) abline(v=p, lty=2, col="grey")
 	abline(h=0,col='grey')
 }

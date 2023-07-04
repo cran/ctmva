@@ -4,7 +4,7 @@
 #'
 #' @param fdobj1,fdobj2  a pair of continuous-time multivariate data sets, of class \code{"\link[fda]{fd}"}
 #' @return  A list consisting of
-#' \item{vex1, vex2 }{matrices defining the canonical variates. The first columns of each give the coefficients defining the first pair of canonical variates; and so on.}  
+#' \item{vex1, vex2 }{matrices defining the canonical variates. The first columns of each give the coefficients defining the first pair of canonical variates; and so on.}
 #' \item{cor }{canonical correlations, i.e., correlations between the pairs of canonical variates}
 #'
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
@@ -21,31 +21,31 @@
 #' tempfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"Temperature.C"], daybasis)$fd
 #' precfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"log10precip"], daybasis)$fd
 #' tpcor <- cca.ct(tempfd, precfd)
-#' oldpar <- par(mfrow=1:2)
-#' barplot(tpcor$vex1[,1], horiz=TRUE, las=1, main="Temperature", 
+#' par(mfrow=1:2)
+#' barplot(tpcor$vex1[,1], horiz=TRUE, las=1, main="Temperature",
 #'             sub="First canonical coefficients vector")
 #' barplot(tpcor$vex2[,1], horiz=TRUE, las=1, main="Log precipitation",
 #'             sub="First canonical coefficients vector")
-#' par(oldpar)
+#'
 #'
 #'
 #' @export cca.ct
 cca.ct <-
   function(fdobj1, fdobj2) {
     if (!isTRUE(fdobj1$basis == fdobj2$basis)) stop("Basis for both fd arguments must be same.")
-    if (fdobj1$basis$type != "bspline") 
+    if (fdobj1$basis$type != "bspline")
       stop("Continuous-time canonical correlation is implemented only for B-spline bases.")
-    if (fdobj1$basis$nbasis < ncol(fdobj1$coefs) + ncol(fdobj2$coefs)) 
+    if (fdobj1$basis$nbasis < ncol(fdobj1$coefs) + ncol(fdobj2$coefs))
       stop("Combined number of functions in fdobj1, fdobj2 cannot exceed the number of basis functions.")
     P0 <- inprod.cent(fdobj1$basis)
 
     C1 <- fdobj1$coef
     C2 <- fdobj2$coef
-    if (qr(crossprod(C1, P0%*%C1))$rank!=ncol(fdobj1$coefs)) 
+    if (qr(crossprod(C1, P0%*%C1))$rank!=ncol(fdobj1$coefs))
       stop("Covariance matrix for fdobj1 is not full-rank.")
     i11 <- solve(crossprod(C1, P0%*%C1))
     m12 <- crossprod(C1, P0%*%C2)
-    if (qr(crossprod(C2, P0%*%C2))$rank!=ncol(fdobj2$coefs)) 
+    if (qr(crossprod(C2, P0%*%C2))$rank!=ncol(fdobj2$coefs))
       stop("Covariance matrix for fdobj2 is not full-rank.")
     i22 <- solve(crossprod(C2, P0%*%C2))
     mat1 <- i11 %*% m12 %*% i22 %*% t(m12)
@@ -53,7 +53,7 @@ cca.ct <-
     eig1 <- eigen(mat1); eig2 <- eigen(mat2)
     vex1 <- eig1$vec
     vex2 <- eig2$vec
-    #if (any(is.complex(vex1[,min(ncol(vex1),ncol(vex2))]))||any(is.complex(vex2[,min(ncol(vex1),ncol(vex2))]))) 
+    #if (any(is.complex(vex1[,min(ncol(vex1),ncol(vex2))]))||any(is.complex(vex2[,min(ncol(vex1),ncol(vex2))])))
     #  warning("Complex canonical coefficients. These may correspond to perfectly correlated canonical variates.")
     rownames(vex1) <- colnames(fdobj1$coef)
     rownames(vex2) <- colnames(fdobj2$coef)

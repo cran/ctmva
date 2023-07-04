@@ -51,6 +51,8 @@ cor.ct <-
     dinv2 <- matrix(0,nrow(Phi2),nrow(Phi2))
     diag(dinv2) <- 1/sqrt(diag(Phi2 %*% P0 %*% t(Phi2) / diff(fdobj2$basis$rangeval)))
     matt <- dinv1 %*% covmat %*% dinv2
+    matt[matt > 1] <- 1
+    matt[matt < -1] <- -1
 
     if(!is.null(fdobj1$fdnames$reps)) rownames(matt) <- paste0(fdobj1$fdnames$reps)
     else rownames(matt) <- paste0("Comp.", 1:ncol(fdobj1$coef))
@@ -58,4 +60,4 @@ cor.ct <-
     if(!is.null(fdobj2$fdnames$reps)) colnames(matt) <- paste0(fdobj2$fdnames$reps)
     else colnames(matt) <- paste0("Comp.", 1:ncol(fdobj2$coef))
     return(matt)
-  }
+}

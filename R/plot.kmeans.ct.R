@@ -9,11 +9,13 @@
 #' k cluster means versus time.
 #' @param mark.transitions  logical: Should transitions between clusters be marked
 #' with vertical lines? Defaults to \code{TRUE}.
-#' @param col  plot colours
+#' @param col  plot colors
 #' @param lty  line type
 #' @param xlab,ylab  x- and y-axis labels
-#' @param legend logical: should a legend be included? Default is \code{TRUE}.
+#' @param legend either a logical variable (whether a legend should be included) or a character
+#' vector to appear in the legend. Default is \code{TRUE}.
 #' @param ncol.legend number of columns for legend
+#' @param cex.legend character expansion factor for legend
 #' @param \dots  other arguments passed to \code{\link{matplot}}
 #' @return  None; a plot is generated.
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
@@ -24,7 +26,8 @@
 #' @export plot.kmeans.ct
 #' @export
 plot.kmeans.ct <-
-  function(x, type="functions", mark.transitions=TRUE, col=NULL, lty=NULL, xlab="Time", ylab=NULL, legend=TRUE, ncol.legend=1, ...) {
+  function(x, type="functions", mark.transitions=TRUE, col=NULL, lty=NULL, xlab="Time", ylab=NULL, legend=TRUE,
+           ncol.legend=1, cex.legend=1, ...) {
     means <- x$means
     mtrx <- NULL
     rng <- x$fdobj$basis$range
@@ -34,9 +37,19 @@ plot.kmeans.ct <-
       if (is.null(lty)) lty <- 1:min(5, ncol(means))
       if (is.null(ylab)) ylab <- ""
       matplot(grid, eval.fd(grid, x$fdobj), type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
+
+      legvec <- NULL
+      if (is.character(legend)) {
+        legvec <- legend
+        legend <- TRUE
+      }
       if (legend){
-        if(!is.null(x$fdobj$fdnames$reps)) {legend("topright", legend=x$fdobj$fdnames$reps, col=col, lty=lty, ncol = ncol.legend, cex = 0.5)
-          }else legend("topright", legend=paste0("f", 1:ncol(x$fdobj$coefs)), col=col, lty=lty, ncol = ncol.legend, cex = 0.5)
+        if (is.null(legvec)) {
+          legvec <- if (!is.null(x$fdobj$fdnames[[2]])) x$fdobj$fdnames[[2]]
+                   else paste0("f", 1:ncol(x$fdobj$coefs))
+        }
+        legend("topright", legend=legvec, col=col, lty=lty,
+                                          ncol = ncol.legend, cex = cex.legend)
       }
     } else if (type=="distance") {
       if (is.null(col)) col <- 1:nrow(means)
@@ -47,7 +60,8 @@ plot.kmeans.ct <-
         mtrx <- cbind(mtrx, func(grid))
       }
       matplot(grid, mtrx, type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
-      if (legend) legend("topright", title="Squared distance to...", legend=paste("Mean", 1:nrow(means)), col=col, lty=lty, ncol = ncol.legend, cex = 0.5)
+      if (legend) legend("topright", title="Squared distance to...", legend=paste("Mean", 1:nrow(means)), col=col,
+                         lty=lty, ncol = ncol.legend, cex = cex.legend)
     }
     if (mark.transitions) {
       for (pt in x$transitions) abline(v=pt, col="grey")

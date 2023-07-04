@@ -21,7 +21,7 @@
 #' @seealso  \code{\link{plot.kmeans.ct}}
 #' @examples
 #'
-#'
+#
 #' require(fda)
 #' data(CanadianWeather)
 #' daybasis <- create.bspline.basis(c(0,365), nbasis=55)
@@ -53,7 +53,7 @@ kmeans.ct <-
     count <- 1
 
     # Obtain coefficients of polynomial within interval
-    oldoption <- options()  
+    oldoption <- options()
     on.exit(options(oldoption))
     options(digits=15)
     scalefac <- 10^floor(log10(rng[2]))
@@ -68,7 +68,7 @@ kmeans.ct <-
     for (nn in 2:norder) polycoefs[nn,,] <- polycoefs[nn,,] / scalefac^(nn-1)  # rescale back
 
     while (mean(abs(means-oldmeans)) > tol && count<=max.iter) {
-      message("Iteration", count, "\n")
+      cat("Iteration", count, "\n")
       oldmeans <- means
 
       # Find all crossing points of distance-from-cluster-center functions

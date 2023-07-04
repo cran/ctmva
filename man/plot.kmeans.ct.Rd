@@ -14,6 +14,7 @@
   ylab = NULL,
   legend = TRUE,
   ncol.legend = 1,
+  cex.legend = 1,
   ...
 )
 }
@@ -27,15 +28,18 @@ k cluster means versus time.}
 \item{mark.transitions}{logical: Should transitions between clusters be marked
 with vertical lines? Defaults to \code{TRUE}.}
 
-\item{col}{plot colours}
+\item{col}{plot colors}
 
 \item{lty}{line type}
 
 \item{xlab, ylab}{x- and y-axis labels}
 
-\item{legend}{logical: should a legend be included? Default is \code{TRUE}.}
+\item{legend}{either a logical variable (whether a legend should be included) or a character
+vector to appear in the legend. Default is \code{TRUE}.}
 
 \item{ncol.legend}{number of columns for legend}
+
+\item{cex.legend}{character expansion factor for legend}
 
 \item{\dots}{other arguments passed to \code{\link{matplot}}}
 }

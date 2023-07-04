@@ -11,24 +11,27 @@ inprod.cent(basis1, basis2 = basis1, rng = NULL)
 
 \item{basis2}{an optional second basis}
 
-\item{rng}{range (of times) spanned by the basis}
+\item{rng}{time range. By default, the entire range spanned by the basis, or the intersection of the ranges of the two bases.}
 }
 \value{
 Matrix of inner products of each pair of centered basis functions.
 }
 \description{
-Most methods of continous-time multivariate analysis require a matrix of
-inner products of pairs of functions from a basis, such as a B-spline basis,
+Several methods of continous-time multivariate analysis require a matrix of
+inner products of pairs of centered functions from a basis, such as a B-spline basis,
 or pairs consisting of one function from each of two bases. This function computes
 such matrices via 7-point Newton-Cotes integration, which is exact for cubic
-B-splines.
+B-splines. For a Fourier basis with the inner product taken over the entire range,
+a simple closed form is used instead of integration.
 }
 \examples{
 
 
 require(fda)
-basis8 <- create.bspline.basis(nbasis=8)
-inprod.cent(basis8)
+bbasis6 <- create.bspline.basis(nbasis=6)
+inprod.cent(bbasis6)
+fbasis7 <- create.fourier.basis(nbasis=7)
+inprod.cent(fbasis7)
 
 }
 \seealso{

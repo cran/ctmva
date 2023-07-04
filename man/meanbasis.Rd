@@ -4,10 +4,12 @@
 \alias{meanbasis}
 \title{Compute means of basis functions}
 \usage{
-meanbasis(basis)
+meanbasis(basis, rng = NULL)
 }
 \arguments{
 \item{basis}{a basis object of class \code{"\link[fda]{basisfd}"}}
+
+\item{rng}{time range. By default, the entire interval spanned by the basis. Must be left NULL for Fourier bases.}
 }
 \value{
 Vector of means of the basis functions
@@ -20,8 +22,11 @@ this function simply computes the vector of means of the basis functions. Used i
 
 
 require(fda)
+bbasis6 <- create.bspline.basis(nbasis=6)
+meanbasis(bbasis6)
+meanbasis(bbasis6, c(.3,.6))
 fbasis11 <- create.fourier.basis(nbasis=11)
-zapsmall(meanbasis(fbasis11))    # the sine functions have mean 0
+meanbasis(fbasis11)
 
 }
 \author{

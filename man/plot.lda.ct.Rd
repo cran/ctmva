@@ -4,12 +4,16 @@
 \alias{plot.lda.ct}
 \title{Plot an lda.ct object}
 \usage{
-\method{plot}{lda.ct}(x, ylab = "Discriminants", xlab = "Time", ...)
+\method{plot}{lda.ct}(x, ylab = "Discriminants", xlab = "Time", which = NULL, col = NULL, ...)
 }
 \arguments{
 \item{x}{linear discriminant analysis object produced by \code{\link{lda.ct}}}
 
 \item{ylab, xlab}{y- and x-axis labels}
+
+\item{which}{which of the linear discrminants to plot}
+
+\item{col}{color vector}
 
 \item{\dots}{other arguments passed to \code{\link{matplot}}}
 }
