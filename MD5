@@ -1,10 +1,10 @@
-586104d0029b88113f3dfd2bb40507a9 *DESCRIPTION
+be35dedecfb9b6defcd84372f1cbe0e4 *DESCRIPTION
 946e0857cf24961f873176af9fda5ebb *NAMESPACE
 ae4dc9b07a23ae56b380420a4e11fcf4 *R/cca.ct.R
 263cb345c809b6ca746ee42458429078 *R/center.ct.R
 4b97f6f029bccff600c51385afc03350 *R/cor.ct.R
 6b714bf5cda28c5b2ec0db79ff0bf85b *R/cov.ct.R
-aaaeb6cff115665447d1e5f09e6e6e49 *R/ctmva-package.R
+929d9f62bea284759eab683ffae4c993 *R/ctmva-package.R
 143525f17d17347b61972b26f89a1731 *R/inprod.cent.R
 8e0e2b36f4bb3de9dfba47cdd5b6436d *R/kmeans.ct.R
 1fc7234ae454ba45b05674e50d4cbe9f *R/lda.ct.R
@@ -17,7 +17,7 @@ eaee9e908c71b00d9451a05305f62ada *man/cca.ct.Rd
 4766284ba78973564a8c804a0a902a2e *man/center.ct.Rd
 c4cac3249da6bd37c7137d167fcccce6 *man/cor.ct.Rd
 8580dfc4371d8445467d1f9bcf885efc *man/cov.ct.Rd
-3856e2b33197d4d02e4c39c22e9de37a *man/ctmva-package.Rd
+9a562ef1d0424d961053e1808ba22762 *man/ctmva-package.Rd
 b62f40b3c122de49bdc9cd0c5da76761 *man/inprod.cent.Rd
 b818d11ac223884e8c2ba4f4fb32780b *man/kmeans.ct.Rd
 470e443ccaf753b2a23a87d36771c771 *man/lda.ct.Rd

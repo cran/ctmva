@@ -10,11 +10,8 @@ Implements continuous-time analogues of several classical techniques of multivar
 The inputs are \code{"\link[fda]{fd}"} (functional data) objects from the \pkg{fda} package.
 }
 \references{
-Paul, Biplab and Reiss, Philip T. (2022). Continuous-time multivariate analysis. Preprint.
-
-Ramsay, James O. and Silverman, Bernard W. (2005). Functional Data Analysis, 2nd ed., Springer, New York.
-
-Ramsay, J. O.; Hooker, Giles and Graves, Spencer (2009). Functional Data Analysis with R and Matlab, Springer, New York.
+Paul, Biplab; Reiss, Philip T.;  and Cui, Erjia (2023).
+Continuous-time multivariate analysis. Preprint, doi.org/10.48550/arXiv.2307.09404.
 }
 \author{
 Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
