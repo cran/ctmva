@@ -17,6 +17,7 @@
 #' @seealso  \code{\link{cov.ct}}; \code{\link{princomp}}, for the classical version
 #' @examples
 #'
+#' \dontrun{
 #'
 #' # Data for one session from a classic EEG data set
 #' require(fda)
@@ -54,6 +55,7 @@
 #' eegspace(eegcoord[cidx,4:5],ld$scaling[,2], colorlab="LD2 coefficients",
 #'          mar=c(17,3,12,2), cex.main=2)
 #'
+#' }
 #'
 #' @export pca.ct
 pca.ct <- function(fdobj, cor=FALSE, common_trend=FALSE) {

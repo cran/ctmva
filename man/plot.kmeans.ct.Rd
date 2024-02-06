@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{kmeans.ct}(
   x,
-  type = "functions",
+  plottype = "functions",
   mark.transitions = TRUE,
   col = NULL,
   lty = NULL,
@@ -21,7 +21,7 @@
 \arguments{
 \item{x}{clustering object produced by \code{\link{kmeans.ct}}}
 
-\item{type}{either \code{"functions"} (the default), to display each variable
+\item{plottype}{either \code{"functions"} (the default), to display each variable
 as a smooth function of time, or \code{"distance"}, to plot distances from the
 k cluster means versus time.}
 
@@ -54,5 +54,5 @@ to \code{\link{kmeans.ct}}.
 \code{\link{kmeans.ct}}, which includes an example
 }
 \author{
-Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
+Philip Tzvi Reiss <reiss@stat.haifa.ac.il> and Biplab Paul <paul.biplab497@gmail.com>
 }

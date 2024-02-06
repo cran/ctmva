@@ -15,8 +15,8 @@ A standardized (centered and scaled) version of the input data.
 \description{
 Subtracts the (continuous-time) mean and divides by the (continuous-time) standard
 deviation of each of the variables. This is the continuous-time analogue
-of taking an \eqn{n \times p} data matrix, subtracting the mean of each column, and
-dividing by the standard deviation of each column, as is done by
+of taking an \eqn{n \times p} data matrix, subtracting the mean of each column, and 
+dividing by the standard deviation of each column, as is done by 
 \code{\link{scale}(\dots, center=TRUE, scale=TRUE)}.
 }
 \seealso{

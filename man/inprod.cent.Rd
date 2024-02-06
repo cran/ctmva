@@ -26,12 +26,14 @@ a simple closed form is used instead of integration.
 }
 \examples{
 
+\dontrun{
 
 require(fda)
 bbasis6 <- create.bspline.basis(nbasis=6)
 inprod.cent(bbasis6)
 fbasis7 <- create.fourier.basis(nbasis=7)
 inprod.cent(fbasis7)
+}
 
 }
 \seealso{

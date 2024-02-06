@@ -1,6 +1,6 @@
 #'  Continuous-time k-means clustering
 #'
-#' A continuous-time version of k-means clustering in which each clusters is a
+#' A continuous-time version of k-means clustering in which each cluster is a
 #' time segments or set of time segments.
 #'
 #' @param fdobj continuous-time multivariate data set of class \code{"\link[fda]{fd}"}
@@ -16,23 +16,34 @@
 #' \item{means }{means of the k clusters}
 #' \item{transitions }{transition points between segments}
 #' \item{cluster }{cluster memberships in the segments defined by the transitions}
+#' \item{size }{length of each cluster, i.e. sum of lengths of subintervals making up each cluster}
+#' \item{totisd }{total integrated sum of distances from the overall mean; this is the analogue of \code{totss} from \code{link{kmeans}}}
+#' \item{withinisd }{within-cluster integrated sum of distances, i.e. integrated sum of distances from each cluster mean}
+#' \item{tot.withinisd }{total within-cluster integrated sum of distances, i.e. \code{sum(withinisd)}}
+#' \item{betweenisd }{between-cluster integrated sum of distances, i.e. \code{totisd-tot.withinss}}
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
 #'
-#' @seealso  \code{\link{plot.kmeans.ct}}
+#' @seealso  \code{\link{kmeans}}, \code{\link{plot.kmeans.ct}}
 #' @examples
 #'
-#
+#' \dontrun{
+#'
 #' require(fda)
 #' data(CanadianWeather)
 #' daybasis <- create.bspline.basis(c(0,365), nbasis=55)
 #' tempfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"Temperature.C"], daybasis)$fd
 #' kmtemp3 <- kmeans.ct(tempfd, 3)
-#' plot(kmtemp3)
+#' plot(kmtemp3, axes=FALSE)
+#' axesIntervals(); box()
+#' plot(silhouette.ct(kmtemp3), axes=FALSE)
+#' axesIntervals(); box()
+#'}
 #'
 #' @importFrom polynom poly.calc
 #' @importFrom stats coef
 #'
 #' @export kmeans.ct
+
 kmeans.ct <-
   function(fdobj, k, common_trend=FALSE, init.pts=NULL, tol=.001, max.iter=100) {
     if (common_trend) fdobj <- fda::center.fd(fdobj)
@@ -45,16 +56,19 @@ kmeans.ct <-
     means <- eval.fd(init.pts, fdobj)	# k x p
     oldmeans <- means + 2*tol
 
+    C <- fdobj$coef    # nbasis x p
+
+    overallmean <- t(C) %*% meanbasis(fdobj$basis)
+    totisd <- sum(tcrossprod(C) * inprod.cent(bsb))
+
     norder <- bsb$nbasis - length(bsb$params)  # = 4
     breaks <- c(rng[1], bsb$params, rng[2])
     nintervals <- length(breaks) - 1
 
-    B <- t(fdobj$coef)    # p x nbasis
     count <- 1
 
     # Obtain coefficients of polynomial within interval
-    oldoption <- options()
-    on.exit(options(oldoption))
+    digs <- getOption("digits")
     options(digits=15)
     scalefac <- 10^floor(log10(rng[2]))
     polycoefs <- array(dim=c(norder, bsb$nbasis, nintervals))
@@ -66,6 +80,7 @@ kmeans.ct <-
     }
     rawcoefs <- polycoefs
     for (nn in 2:norder) polycoefs[nn,,] <- polycoefs[nn,,] / scalefac^(nn-1)  # rescale back
+    options(digits=digs)
 
     while (mean(abs(means-oldmeans)) > tol && count<=max.iter) {
       cat("Iteration", count, "\n")
@@ -76,7 +91,7 @@ kmeans.ct <-
       for (i in 1:(k-1)) for (j in (i+1):k) {
         for (int in 1:nintervals) {
           # Find zeroes of polynomial equal to d_i(t)^2 - d_j(t)^2 within subinterval
-          coefvec <- 2 * polycoefs[,,int] %*% crossprod(B, means[j,]-means[i,]) + c(sum(means[i,]^2-means[j,]^2),0,0,0)
+          coefvec <- 2 * polycoefs[,,int] %*% C %*% (means[j,]-means[i,]) + c(sum(means[i,]^2-means[j,]^2),0,0,0)
           zeros <- polyroot(coefvec)
           # If any of those zeros fall in the subinterval, add to crosspts
           realzeros <- Re(zeros[abs(Im(zeros)/Re(zeros))<1e-5])  # ad hoc criterion for a zero to be real...
@@ -96,17 +111,18 @@ kmeans.ct <-
       testpts <- (starts + ends) / 2
       for (m in 1:k) testdists[ , m] <- apply(eval.fd(testpts, fdobj) - rep(1,nsections) %o% means[m,], 1, function(v) sum(v^2))
       cluster_memb <- apply(testdists, 1, which.min)
+      cluster_length <- c()
 
       # Update cluster means
       for (m in 1:k) {
         which_sections <- which(cluster_memb==m)
-        cluster_length <- sum((ends - starts)[which_sections])
+        cluster_length[m] <- sum((ends - starts)[which_sections])
 
         # Integrate f over cluster-m sections
         int_f <- rep(0,ncol(fdobj$coef))
         for (section in which_sections) {
 
-          # Integrate f within section (check it!)
+          # Integrate f within section
           start. <- starts[section]; end. <- ends[section]
           pts <- c(start., breaks[breaks>start. & breaks<end.], end.)
           npts <- length(pts)
@@ -118,15 +134,29 @@ kmeans.ct <-
           int_section <- colSums(diag(mult) %*% eval.fd(allpts, fdobj))
           int_f <- int_f + int_section
         }
-        means[m, ] <- int_f / cluster_length
+        means[m, ] <- int_f / cluster_length[m]
       }
 
       count <- count+1
     }
 
+    withinisd <- rep(0, k)
+
+    for (m in 1:k) {
+      for (section in which(cluster_memb==m)) {
+        start. <- starts[section]; end. <- ends[section]
+        withinisd[m] <- withinisd[m] + sum(tcrossprod(C) *
+                                           inprod.cent(bsb, rng=c(starts[section], ends[section])))
+      }
+    }
+    tot.withinisd <- sum(withinisd)
+    betweenisd <- totisd - tot.withinisd
+
     transitions <- ends[-length(ends)][diff(cluster_memb)!=0]
     cluster <- cluster_memb[c(1, 1+which(diff(cluster_memb)!=0))]
-    lst <- list(fdobj=fdobj, means=means, transitions=transitions, cluster=cluster)
+    lst <- list(fdobj=fdobj, means=means, transitions=transitions, cluster=cluster, size=cluster_length,
+                totisd=totisd, withinisd=withinisd, tot.withinisd=tot.withinisd, betweenisd=betweenisd)
     class(lst) <- "kmeans.ct"
     lst
   }
+

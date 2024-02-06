@@ -4,7 +4,7 @@
 #' to \code{\link{kmeans.ct}}.
 #'
 #' @param x  clustering object produced by \code{\link{kmeans.ct}}
-#' @param type  either \code{"functions"} (the default), to display each variable
+#' @param plottype  either \code{"functions"} (the default), to display each variable
 #' as a smooth function of time, or \code{"distance"}, to plot distances from the
 #' k cluster means versus time.
 #' @param mark.transitions  logical: Should transitions between clusters be marked
@@ -18,7 +18,7 @@
 #' @param cex.legend character expansion factor for legend
 #' @param \dots  other arguments passed to \code{\link{matplot}}
 #' @return  None; a plot is generated.
-#' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
+#' @author Philip Tzvi Reiss <reiss@stat.haifa.ac.il> and Biplab Paul <paul.biplab497@gmail.com>
 #'
 #' @seealso  \code{\link{kmeans.ct}}, which includes an example
 #'
@@ -26,13 +26,13 @@
 #' @export plot.kmeans.ct
 #' @export
 plot.kmeans.ct <-
-  function(x, type="functions", mark.transitions=TRUE, col=NULL, lty=NULL, xlab="Time", ylab=NULL, legend=TRUE,
+  function(x, plottype="functions", mark.transitions=TRUE, col=NULL, lty=NULL, xlab="Time", ylab=NULL, legend=TRUE,
            ncol.legend=1, cex.legend=1, ...) {
     means <- x$means
     mtrx <- NULL
     rng <- x$fdobj$basis$range
     grid <- seq(rng[1], rng[2],length.out = 501)
-    if (type=="functions") {
+    if (plottype=="functions") {
       if (is.null(col)) col <- 1:min(8, ncol(means))
       if (is.null(lty)) lty <- 1:min(5, ncol(means))
       if (is.null(ylab)) ylab <- ""
@@ -51,7 +51,7 @@ plot.kmeans.ct <-
         legend("topright", legend=legvec, col=col, lty=lty,
                                           ncol = ncol.legend, cex = cex.legend)
       }
-    } else if (type=="distance") {
+    } else if (plottype=="distance") {
       if (is.null(col)) col <- 1:nrow(means)
       if (is.null(lty)) lty <- 1:nrow(means)
       if (is.null(ylab)) ylab <- "Squared distance"

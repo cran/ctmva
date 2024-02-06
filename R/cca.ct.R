@@ -13,6 +13,7 @@
 #' @seealso  \code{\link{cancor}}, for classical CCA
 #' @examples
 #'
+#' \dontrun{
 #'
 #' # CCA relating Canadian daily temperature and precipitation data
 #' require(fda)
@@ -27,6 +28,7 @@
 #' barplot(tpcor$vex2[,1], horiz=TRUE, las=1, main="Log precipitation",
 #'             sub="First canonical coefficients vector")
 #'
+#'}
 #'
 #'
 #' @export cca.ct

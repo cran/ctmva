@@ -24,6 +24,7 @@ matrix of two such data sets.
 }
 \examples{
 
+\dontrun{
 
 # Canadian temperature data
 
@@ -43,6 +44,7 @@ ord <- corrMatOrder(dtcor)
 dtcord <- dtcor[ord,ord]
 corrplot(dtcord, method = 'square', type = 'lower', tl.col="black", tl.cex = 0.6)
 
+}
 
 }
 \seealso{

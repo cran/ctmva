@@ -27,6 +27,7 @@ A continuous-time version of principal component analysis.
 }
 \examples{
 
+\dontrun{
 
 # Data for one session from a classic EEG data set
 require(fda)
@@ -64,6 +65,7 @@ eegspace(eegcoord[cidx,4:5],ld$scaling[,1], colorlab="LD1 coefficients",
 eegspace(eegcoord[cidx,4:5],ld$scaling[,2], colorlab="LD2 coefficients",
          mar=c(17,3,12,2), cex.main=2)
 
+}
 
 }
 \seealso{

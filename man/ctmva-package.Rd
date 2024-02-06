@@ -4,14 +4,13 @@
 \name{ctmva-package}
 \alias{ctmva-package}
 \alias{ctmva}
-\title{Continuous-Time Multivariate Analysis}
+\title{Continuous-time multivariate analysis}
 \description{
 Implements continuous-time analogues of several classical techniques of multivariate analysis.
 The inputs are \code{"\link[fda]{fd}"} (functional data) objects from the \pkg{fda} package.
 }
 \references{
-Paul, Biplab; Reiss, Philip T.;  and Cui, Erjia (2023).
-Continuous-time multivariate analysis. Preprint, doi.org/10.48550/arXiv.2307.09404.
+Paul, B., Reiss, P. T. and Cui, E. (2023). Continuous-time multivariate analysis. arXiv:2307.09404 [stat.ME]
 }
 \author{
 Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>

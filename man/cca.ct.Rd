@@ -22,6 +22,7 @@ Columns of the output matrix \code{vex2} are flipped as needed to ensure positiv
 }
 \examples{
 
+\dontrun{
 
 # CCA relating Canadian daily temperature and precipitation data
 require(fda)
@@ -36,6 +37,7 @@ barplot(tpcor$vex1[,1], horiz=TRUE, las=1, main="Temperature",
 barplot(tpcor$vex2[,1], horiz=TRUE, las=1, main="Log precipitation",
             sub="First canonical coefficients vector")
 
+}
 
 
 }

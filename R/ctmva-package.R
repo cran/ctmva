@@ -1,4 +1,4 @@
-#' Continuous-Time Multivariate Analysis
+#' Continuous-time multivariate analysis
 #'
 #' Implements continuous-time analogues of several classical techniques of multivariate analysis.
 #' The inputs are \code{"\link[fda]{fd}"} (functional data) objects from the \pkg{fda} package.
@@ -9,9 +9,7 @@
 #'
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
 #'
-#' @references Paul, Biplab; Reiss, Philip T.;  and Cui, Erjia (2023).
-#' Continuous-time multivariate analysis. Preprint, doi.org/10.48550/arXiv.2307.09404.
-#'
+#' @references Paul, B., Reiss, P. T. and Cui, E. (2023). Continuous-time multivariate analysis. arXiv:2307.09404 [stat.ME]
 #' @keywords package
 #'
 #' @importFrom fda fd eval.basis eval.fd
