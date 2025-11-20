@@ -25,9 +25,9 @@ function(x, ylab="Discriminants", xlab="Time", which=NULL, col=NULL, ...) {
 	wich <- if (is.null(which)) 1:ncol(fdobj$coef) else which
 	colvec <- if (is.null(col)) wich else col
 	grid <- seq(fdobj$basis$range[1], fdobj$basis$range[2], length = 401)
-	matplot(grid, scale(eval.fd(grid,fdobj)[,wich],T,F), type='l', lty=1, ylab=ylab, xlab=xlab,
+	graphics::matplot(grid, scale(fda::eval.fd(grid,fdobj)[,wich],T,F), type='l', lty=1, ylab=ylab, xlab=xlab,
 	        col=colvec, ...)
-	legend("topleft", legend=paste0("LD", wich), lty=1, col=colvec)
-	for (p in x$partition) abline(v=p, lty=2, col="grey")
+	graphics::legend("topleft", legend=paste0("LD", wich), lty=1, col=colvec)
+	for (p in x$partition) graphics::abline(v=p, lty=2, col="grey")
 	abline(h=0,col='grey')
 }

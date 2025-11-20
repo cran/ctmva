@@ -15,12 +15,16 @@ cor.ct(fdobj1, fdobj2 = fdobj1, common_trend = FALSE)
 without centering if \code{FALSE} (the default)}
 }
 \value{
-A matrix of (cross-) correlations
+If \code{fdobj1} and \code{fdobj2} each consist of a single curve,
+the (scalar) CT correlation between them. Otherwise a matrix of (cross-) correlations is returned.
 }
 \description{
 Computes the correlation matrix of a continuous-time multivariate
 data set represented as an \code{\link[fda]{fd}} object; or the cross-correlation
 matrix of two such data sets.
+}
+\note{
+When \code{fdobj1==fdobj2}, \code{cor.ct(\dots)} is the same as \code{cov2cor(cov.ct(\dots))}.
 }
 \examples{
 

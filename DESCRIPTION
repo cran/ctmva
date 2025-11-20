@@ -1,10 +1,9 @@
 Package: ctmva
 Type: Package
 Title: Continuous-Time Multivariate Analysis
-Version: 1.4.0
-Date: 2024-02-06
-Authors@R: c(person("Biplab", "Paul", role = c("aut", "cre"), email = "paul.biplab497@gmail.com"), 
-             person("Philip Tzvi", "Reiss", role = c("aut")))
+Version: 1.5.0
+Date: 2025-11-20
+Authors@R: c(person("Biplab", "Paul", role = c("aut", "cre"), email = "paul.biplab497@gmail.com"), person("Philip Tzvi", "Reiss", role = c("aut")), person("Noemi", "Foa", role = c("aut")), person("Dror", "Arbiv", role = c("aut")))
 Maintainer: Biplab Paul <paul.biplab497@gmail.com>
 Description: Implements a basis function or functional data analysis framework
              for several techniques of multivariate analysis in continuous-time 
@@ -12,16 +11,19 @@ Description: Implements a basis function or functional data analysis framework
              several classical techniques of multivariate analysis, such as 
              principal component analysis, canonical correlation analysis, 
              Fisher linear discriminant analysis, K-means clustering, and so 
-             on. Details are in Biplab Paul, Philip T. Reiss and Erjia Cui (2023) 
-             "Continuous-time multivariate analysis" <doi:10.48550/arXiv.2307.09404>.
+             on. Details are in Biplab Paul, Philip T. Reiss, Erjia Cui and Noemi Foa (2025) 
+             "Continuous-time multivariate analysis" <doi: 10.1080/10618600.2024.2374570>.
 License: GPL (>= 2)
-Imports: fda, polynom
-Suggests: eegkit, corrplot
-RoxygenNote: 7.2.3
+Depends: R (>= 4.1.0)
+Imports: fda, polynom, MASS, mgcv, Matrix
+Suggests: dplyr, ggplot2, wbwdi
+RoxygenNote: 7.3.3
 Author: Biplab Paul [aut, cre],
-  Philip Tzvi Reiss [aut]
+  Philip Tzvi Reiss [aut],
+  Noemi Foa [aut],
+  Dror Arbiv [aut]
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2024-02-06 11:12:57 UTC; GOBINDO
+Packaged: 2025-11-20 11:23:54 UTC; GOBINDO
 Repository: CRAN
-Date/Publication: 2024-02-06 11:30:02 UTC
+Date/Publication: 2025-11-20 15:00:02 UTC

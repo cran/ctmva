@@ -8,9 +8,11 @@
 #' @param fdobj2  an optional second data set
 #' @param common_trend  logical: centering wrt mean function if \code{TRUE},
 #' without centering if \code{FALSE} (the default)
-#' @return  A matrix of (cross-) correlations
+#' @return  If \code{fdobj1} and \code{fdobj2} each consist of a single curve,
+#' the (scalar) CT correlation between them. Otherwise a matrix of (cross-) correlations is returned.
 #' @author Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
 #'
+#' @note When \code{fdobj1==fdobj2}, \code{cor.ct(\dots)} is the same as \code{cov2cor(cov.ct(\dots))}.
 #' @seealso
 #' \code{\link[fda]{center.fd}}, for centering of \code{"\link[fda]{fd}"} objects;  \code{\link{inprod.cent}}
 #' @examples
@@ -51,11 +53,11 @@ cor.ct <-
     Phi2 <- t(fdobj2$coef)
     covmat <- Phi1 %*% P0 %*% t(Phi2) / diff(overlap)
     dinv1 <- matrix(0,nrow(Phi1),nrow(Phi1))
-    diag(dinv1) <- 1/sqrt(diag(Phi1 %*% inprod.cent(fdobj1$basis,rng=overlap) %*% t(Phi1) / diff(overlap)))
-    dinv1 <- dinv1
+    samebasis <- (length(all.equal(fdobj1$basis, fdobj2$basis))==1)
+    rng. <- if (samebasis) NULL else overlap
+    diag(dinv1) <- 1/sqrt(diag(Phi1 %*% inprod.cent(fdobj1$basis,rng=rng.) %*% t(Phi1) / diff(overlap)))
     dinv2 <- matrix(0,nrow(Phi2),nrow(Phi2))
-    diag(dinv2) <- 1/sqrt(diag(Phi2 %*% inprod.cent(fdobj2$basis,rng=overlap) %*% t(Phi2) / diff(overlap)))
-    dinv2 <- dinv2
+    diag(dinv2) <- 1/sqrt(diag(Phi2 %*% inprod.cent(fdobj2$basis,rng=rng.) %*% t(Phi2) / diff(overlap)))
     matt <- dinv1 %*% covmat %*% dinv2
     matt[matt > 1] <- 1
     matt[matt < -1] <- -1

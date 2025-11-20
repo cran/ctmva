@@ -34,7 +34,7 @@ meanbasis <- function(basis, rng=NULL) {
         allpts <- sort(allpts0)
         mult <- rep(diff(pts), each=7) * rep(c(41/140, 54/35, 27/140, 68/35, 27/140, 54/35, 41/140),(npts-1)) / 6
         dmult <- diag(mult)
-        return(colSums(dmult %*% eval.basis(allpts, basis)) / diff(rng))
+        return(colSums(dmult %*% fda::eval.basis(allpts, basis)) / diff(rng))
     }
     else if (basis$type=="fourier") {
         if (!is.null(rng)) stop("Argument 'rng' implemented only for B-spline bases")

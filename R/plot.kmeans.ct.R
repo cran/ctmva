@@ -36,7 +36,7 @@ plot.kmeans.ct <-
       if (is.null(col)) col <- 1:min(8, ncol(means))
       if (is.null(lty)) lty <- 1:min(5, ncol(means))
       if (is.null(ylab)) ylab <- ""
-      matplot(grid, eval.fd(grid, x$fdobj), type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
+      graphics::matplot(grid, fda::eval.fd(grid, x$fdobj), type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
 
       legvec <- NULL
       if (is.character(legend)) {
@@ -56,10 +56,10 @@ plot.kmeans.ct <-
       if (is.null(lty)) lty <- 1:nrow(means)
       if (is.null(ylab)) ylab <- "Squared distance"
       for (i in 1:nrow(means)) {
-        func <- Vectorize(function(t) sum((eval.fd(t,x$fdobj)-means[i,])^2))
+        func <- Vectorize(function(t) sum((fda::eval.fd(t,x$fdobj)-means[i,])^2))
         mtrx <- cbind(mtrx, func(grid))
       }
-      matplot(grid, mtrx, type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
+      graphics::matplot(grid, mtrx, type="l", xlab=xlab, ylab=ylab, col=col, lty=lty, ...)
       if (legend) legend("topright", title="Squared distance to...", legend=paste("Mean", 1:nrow(means)), col=col,
                          lty=lty, ncol = ncol.legend, cex = cex.legend)
     }

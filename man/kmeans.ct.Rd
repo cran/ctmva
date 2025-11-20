@@ -35,7 +35,7 @@ Object of class "\code{kmeans.ct}", a list consisting of
 \item{transitions }{transition points between segments}
 \item{cluster }{cluster memberships in the segments defined by the transitions}
 \item{size }{length of each cluster, i.e. sum of lengths of subintervals making up each cluster}
-\item{totisd }{total integrated sum of distances from the overall mean; this is the analogue of \code{totss} from \code{link{kmeans}}}
+\item{totisd }{total integrated sum of distances from the overall mean, analogous to \code{totss} from \code{\link{kmeans}}}
 \item{withinisd }{within-cluster integrated sum of distances, i.e. integrated sum of distances from each cluster mean}
 \item{tot.withinisd }{total within-cluster integrated sum of distances, i.e. \code{sum(withinisd)}}
 \item{betweenisd }{between-cluster integrated sum of distances, i.e. \code{totisd-tot.withinss}}
@@ -53,15 +53,15 @@ data(CanadianWeather)
 daybasis <- create.bspline.basis(c(0,365), nbasis=55)
 tempfd <- smooth.basis(day.5, CanadianWeather$dailyAv[,,"Temperature.C"], daybasis)$fd
 kmtemp3 <- kmeans.ct(tempfd, 3)
-plot(kmtemp3, axes=FALSE)
+plot(kmtemp3, axes=FALSE, xlab=", ylab="Temperature")
 axesIntervals(); box()
-plot(silhouette.ct(kmtemp3), axes=FALSE)
+plot(silhouette.ct(kmtemp3), axes=FALSE, xlab=")
 axesIntervals(); box()
 }
 
 }
 \seealso{
-\code{\link{kmeans}}, \code{\link{plot.kmeans.ct}}
+\code{\link{kmeans}}, \code{\link{plot.kmeans.ct}}, \code{\link{silhouette.ct}}
 }
 \author{
 Biplab Paul <paul.biplab497@gmail.com> and Philip Tzvi Reiss <reiss@stat.haifa.ac.il>
