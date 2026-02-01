@@ -1,5 +1,5 @@
-eeb130d895b5497ea95e5aa693743bc7 *DESCRIPTION
-09b8009c2e60311ca56d67e91b3fefb7 *NAMESPACE
+9177e3fbb59f622d98dfa7336b702d3b *DESCRIPTION
+6d08e9b8c06ee0efb129f87eed44ab5d *NAMESPACE
 419e425c381ca67a5bf53d5bd1cde680 *R/cca.ct.R
 269e8e8f55d3ee89d50aee558c1dcd6f *R/ccor.R
 c83e0835baa272a5f4f9c357837cbb0f *R/ccor_boot.R
@@ -11,6 +11,7 @@ e6a415a83dbae468bb79c8a654d88bfc *R/cov.ct.R
 cf7e9d0855f782dbe7608e0a67da24a5 *R/inprod.cent.R
 e3705f1b56aa21c2a68ce134627f4665 *R/kmeans.ct.R
 1fc7234ae454ba45b05674e50d4cbe9f *R/lda.ct.R
+d9617bccf6da1faf0308ad4fdf5b19b8 *R/mds.ct.R
 a83fcddb0b3cce5a2dd2326f39b43cac *R/meanbasis.R
 e5eaf6b5fa748d1c80277ea939b53ec7 *R/pca.ct.R
 061cf22213612031cc32e88a7f9418f1 *R/plot.kmeans.ct.R
@@ -18,6 +19,7 @@ e5eaf6b5fa748d1c80277ea939b53ec7 *R/pca.ct.R
 615e4b7ed748dca36f8659e20ccda840 *R/plot.silhouette.ct.R
 68ecabf0c79ab62b3d06fd8c00225b98 *R/silhouette.ct.R
 82b0740dd72af265a3a92af6d4a27d82 *R/standardize.ct.R
+2102419813ab7cfd5636a35330ca97d0 *R/utils.R
 6ae6298b8ed83f6ae2103e8f93f7b146 *man/cca.ct.Rd
 a942da8047b7bd0a68e3accd86006fa3 *man/ccor.Rd
 a97f317e234378fbc64d891c698ce862 *man/ccor_boot.Rd
@@ -26,13 +28,19 @@ ab35d3891857ae7eab82386b1c4784a6 *man/ccor_posim.Rd
 4766284ba78973564a8c804a0a902a2e *man/center.ct.Rd
 fa19736efba883e726361f3595534f7b *man/cor.ct.Rd
 8580dfc4371d8445467d1f9bcf885efc *man/cov.ct.Rd
+69a99eac47fa27e28f487440d9a2648a *man/ctmva-internal.Rd
 9bb0d4d3f4a0a103ca210768feb3eee9 *man/inprod.cent.Rd
 c48498e6efec29c7584de818f3553b08 *man/kmeans.ct.Rd
 470e443ccaf753b2a23a87d36771c771 *man/lda.ct.Rd
+76b4f7761096e6b796d18d4a62802927 *man/mds.ct.Rd
 a9edfb42eda22f99d01ad885e97e5544 *man/meanbasis.Rd
 0f38565224e786819fb639e127ca6710 *man/pca.ct.Rd
 69116ff45f9adb95c6361c8b734b442e *man/plot.kmeans.ct.Rd
 703e942c2495c044ed19174090a6adbd *man/plot.lda.ct.Rd
+5b687c596a6adebca89f47013220b7d4 *man/plot.mds.ct.Rd
 39dcce92ea1f08d18a79c732f171857c *man/plot.silhouette.ct.Rd
+658779baebe37c638eec04c05473877b *man/procrustes.mds.ct.Rd
+53086aedc84ff38500949e71843367fe *man/procrustes.plot.mds.Rd
+121d76bc77adc716876c94e1bb65f492 *man/s3.Rd
 8acf1c76ea32f4f7e5b612f244d85a04 *man/silhouette.ct.Rd
 cefb05328c169a00b4de12e3cf8e5891 *man/standardize.ct.Rd
